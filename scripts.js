@@ -1,13 +1,13 @@
 const parseWeekDay = (day) => {
   day = day.toLowerCase();
   const days = {
-    monday: "Dilluns",
-    tuesday: "Dimarts",
-    wednesday: "Dimecres",
-    thursday: "Dijous",
-    friday: "Divendres",
-    saturday: "Dissabte",
-    sunday: "Diumenge"
+    1: "Dilluns",
+    2: "Dimarts",
+    3: "Dimecres",
+    4: "Dijous",
+    5: "Divendres",
+    6: "Dissabte",
+    7: "Diumenge"
   }
 
   return days[day] ?? day;
