@@ -19,7 +19,7 @@ const renderPosts = posts => {
     for(let post of posts) {
         let postEl = `<div class="post">
             <h2 class="post__title">${parseWeekDay(post.title)}</h2>
-            <h3 class="post__author">${post.author}</h3>
+            <h3 class="post__author">Autor/a: ${post.author}</h3>
             <h4 class="post__date">${post.date}</h4>
             <p class="post__body">
                 ${post.body}
@@ -32,9 +32,12 @@ const renderPosts = posts => {
 
 
 const loadPosts = async () => {
+  const loader = document.getElementById("posts-loader");
+  loader.classList.add("show");
   const data = await fetch(
     `https://busy-teal-panther-cape.cyclic.app/get-posts`
   );
+  loader.classList.remove("show");
   const posts = await data.json();
   
   return posts;
@@ -42,5 +45,6 @@ const loadPosts = async () => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await loadPosts();
-  renderPosts(posts);
+  const sortedPosts = posts.reverse();
+  renderPosts(sortedPosts);
 });
