@@ -1,22 +1,27 @@
+const renderPosts = (posts, editable = false) => {
+  console.log(editable);
+  const dump = document.getElementById("blog-dump");
+  
+  for (let post of posts) {
+    const postID = posts.indexOf(post);
+    const editAction = editable ? 
+    `<button onclick="editArticle(${postID})">Editar</button>`
+    : "";
 
-
-
-const renderPosts = posts => {
-    const dump = document.getElementById("blog-dump");
-    for(let post of posts) {
-        let postEl = `<div class="post">
+    let postEl = `<div class="post" data-id="${postID}">
             <h2 class="post__title">${post.title}</h2>
-            <h3 class="post__author">Autor/a: ${post.author}</h3>
+            <h3 class="post__author">Autor/a:
+              <span class="post__author-name">${post.author}</span></h3>
             <h4 class="post__date">${post.date}</h4>
-            <p class="post__body">
+            <p contenteditable="true" class="post__body">
                 ${post.body}
             </p>
+            ${editAction}
         </div>`;
 
-        dump.innerHTML += postEl;
-    }
-}
-
+    dump.innerHTML += postEl;
+  }
+};
 
 const loadPosts = async () => {
   const loader = document.getElementById("posts-loader");
@@ -26,12 +31,12 @@ const loadPosts = async () => {
   );
   loader.classList.remove("show");
   const posts = await data.json();
-  
+
   return posts;
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await loadPosts();
   const sortedPosts = posts.reverse();
-  renderPosts(sortedPosts);
+  renderPosts(sortedPosts, editable);
 });
