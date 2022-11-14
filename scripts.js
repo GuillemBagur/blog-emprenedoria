@@ -1,5 +1,4 @@
 const renderPosts = (posts, editable = false) => {
-  console.log(editable);
   const dump = document.getElementById("blog-dump");
 
   for (let post of posts) {
@@ -36,8 +35,23 @@ const loadPosts = async () => {
   return posts;
 };
 
+const sortPosts = posts => {
+  const sortedPosts = posts.sort((postA, postB) => {
+    const dateAParts = postA.date.split("/");
+    const dateBParts = postB.date.split("/");
+    const dateA = new Date(dateAParts[2], dateAParts[1]-1, dateAParts[0]);
+    const dateB = new Date(dateBParts[2], dateBParts[1]-1, dateBParts[0]);
+    console.log(dateAParts, dateBParts);
+    return dateB-dateA;
+  });
+
+  console.log(posts, sortedPosts);
+
+  return sortedPosts;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await loadPosts();
-  const sortedPosts = posts.reverse();
-  renderPosts(sortedPosts, editable);
+  const sortedPos = sortPosts(posts);
+  renderPosts(sortedPos, editable);
 });
