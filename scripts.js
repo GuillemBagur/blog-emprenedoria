@@ -29,6 +29,7 @@ const loadPosts = async () => {
   const data = await fetch(
     `https://busy-teal-panther-cape.cyclic.app/get-posts`
   );
+
   loader.classList.remove("show");
   const posts = await data.json();
 
@@ -41,11 +42,8 @@ const sortPosts = posts => {
     const dateBParts = postB.date.split("/");
     const dateA = new Date(dateAParts[2], dateAParts[1]-1, dateAParts[0]);
     const dateB = new Date(dateBParts[2], dateBParts[1]-1, dateBParts[0]);
-    console.log(dateAParts, dateBParts);
     return dateB-dateA;
   });
-
-  console.log(posts, sortedPosts);
 
   return sortedPosts;
 }
