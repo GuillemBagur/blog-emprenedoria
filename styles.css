@@ -16,6 +16,10 @@ body {
   background-size: cover;
 }
 
+a {
+  color: white;
+}
+
 .title {
   text-align: center;
   background-color: rgb(92, 167, 202);
@@ -44,6 +48,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.post--dark {
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+}
+
 .post__title {
   color: #4ca2cd;
 }
@@ -68,6 +77,10 @@ body {
   text-align: justify;
   color: #1a1a1a;
   line-height: 1.4rem;
+}
+
+.post--dark .post__body {
+  color: #cecece;
 }
 
 .loader {
