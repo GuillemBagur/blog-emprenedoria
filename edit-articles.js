@@ -1,3 +1,15 @@
+let keyInput = document.getElementById("key");
+
+const getToday = () => {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = d.getFullYear();
+
+  const today = dd + "/" + mm + "/" + yyyy;
+  return today;
+};
+
 const editArticle = async (postID) => {
   const el = document.querySelector(`[data-id="${postID}"`);
   const article = {
@@ -7,7 +19,11 @@ const editArticle = async (postID) => {
     body: el.querySelector(".post__body").innerHTML,
   };
 
-  console.log(article);
+  await newArticle(article);
+};
+
+const newArticle = async (article = {}) => {
+  if (JSON.stringify(article) === "{}") article.date = getToday();
   const key = document.getElementById("key").value;
   const req = await fetch(
     `https://busy-teal-panther-cape.cyclic.app/create-post?key=${key}`,
@@ -23,9 +39,19 @@ const editArticle = async (postID) => {
 
   const res = await req.json();
   if (res.done) {
-    alert("Editat correctament!");
+    alert("done");
+    location.reload();
     return;
   }
 
-  alert("Alguna cosa ha fallat.");
+  alert("La contrasenya no és correcta.");
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const pw = localStorage.getItem("pw");
+  document.getElementById("key").value = pw;
+});
+
+const saveNewValue = (el) => {
+  localStorage.setItem("pw", el.value);
 };

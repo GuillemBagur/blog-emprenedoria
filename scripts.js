@@ -48,6 +48,7 @@ const sortPosts = posts => {
   return sortedPosts;
 }
 
+
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await loadPosts();
   const sortedPos = sortPosts(posts);
