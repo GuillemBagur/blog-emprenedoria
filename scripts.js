@@ -1,3 +1,14 @@
+const loadImages = (post) => {
+  if(!post.imgs) return;
+  let result = `<div class="images-wrapper">`;
+  for(let img of post.imgs) {
+    result += `<img src="${img}">`;
+  }
+
+  result += `</div>`;
+  return result;
+}
+
 const renderPosts = (posts, editable = false) => {
   const dump = document.getElementById("blog-dump");
 
@@ -16,6 +27,7 @@ const renderPosts = (posts, editable = false) => {
             <p ${contentEditable} class="post__body">
                 ${post.body}
             </p>
+            ${loadImages(post)}
             ${editAction}
         </div>`;
 
