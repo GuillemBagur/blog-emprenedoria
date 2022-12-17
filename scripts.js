@@ -1,5 +1,5 @@
 const loadImages = (post) => {
-  if(!post.imgs) return;
+  if(!post.imgs) return "";
   let result = `<div class="images-wrapper">`;
   for(let img of post.imgs) {
     result += `<img src="${img}">`;
